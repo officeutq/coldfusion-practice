@@ -11,6 +11,8 @@
     <button type="submit" name="start" value="1">スタート</button>
   </form>
 
+  <p><a href="messages.cfm">メッセージ一覧へ</a></p>
+
   <cfif structKeyExists(form, "start")>
     <cfquery name="messageQuery" datasource="practice">
       SELECT body

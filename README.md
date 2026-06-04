@@ -86,6 +86,20 @@ Password: cfpass
 INSERT INTO messages (body) VALUES ('Hello World');
 ```
 
+## ページ遷移の確認手順
+
+1. ブラウザで `http://localhost:8888/` を開きます。
+2. `メッセージ一覧へ` をクリックします。
+3. `messages.cfm` に遷移することを確認します。
+4. DBの `messages` テーブルの内容が一覧表示されることを確認します。
+5. 一覧に `Hello World` が表示されることを確認します。
+
+## 学習メモ
+
+`<a href="messages.cfm">` は、ブラウザが別のURLへ移動する通常のページ遷移です。今回のように、`index.cfm` から `messages.cfm` へ画面を切り替えたい場合に使います。
+
+`<cfinclude>` は、別ファイルの内容を現在のページ内に読み込むための仕組みです。ブラウザのURLは移動しないため、通常のリンククリックによるページ遷移とは違います。
+
 ## よくあるエラー
 
 ### Docker Desktop未起動
