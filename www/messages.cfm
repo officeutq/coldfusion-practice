@@ -1,3 +1,5 @@
+<cfset messageService = createObject("component", "components.MessageService")>
+<cfset messagesQuery = messageService.listMessages()>
 <!doctype html>
 <html lang="ja">
 <head>
@@ -9,11 +11,11 @@
 
   <p><a href="index.cfm">トップへ戻る</a></p>
 
-  <cfquery name="messagesQuery" datasource="practice">
-    SELECT id, body
-    FROM messages
-    ORDER BY id
-  </cfquery>
+  <form method="post" action="create_message.cfm">
+    <label for="body">新しいメッセージ</label>
+    <input type="text" id="body" name="body">
+    <button type="submit">登録</button>
+  </form>
 
   <cfoutput>
     <p>件数: #messagesQuery.recordCount# 件</p>

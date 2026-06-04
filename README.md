@@ -100,6 +100,27 @@ INSERT INTO messages (body) VALUES ('Hello World');
 
 `<cfinclude>` は、別ファイルの内容を現在のページ内に読み込むための仕組みです。ブラウザのURLは移動しないため、通常のリンククリックによるページ遷移とは違います。
 
+## CFCの学習メモ
+
+`.cfc` はColdFusion Componentのファイルで、処理を部品化するために使えます。JavaのクラスやRailsのサービスクラスに近い役割として、画面から切り出した処理をまとめられます。
+
+今回は `www/components/MessageService.cfc` にDBアクセス処理を分離しました。
+
+- `listMessages()`: `messages` テーブルから `id` と `body` を取得します。
+- `createMessage(body)`: POSTされた本文を `messages` テーブルへ登録します。
+
+`messages.cfm` は画面表示とフォーム表示を担当します。一覧データは `MessageService.cfc` の `listMessages()` を呼び出して取得します。
+
+`create_message.cfm` はPOSTされた登録処理を担当します。入力値が空でない場合だけ `MessageService.cfc` の `createMessage()` を呼び出し、登録後は `cflocation` で `messages.cfm` へリダイレクトします。
+
+`cfqueryparam` はSQLに値を安全に渡すための仕組みです。ユーザー入力をSQLへ直接埋め込まず、`cfqueryparam` 経由で渡すことでSQLインジェクション対策になります。
+
+登録後のリダイレクトは以下のように書きます。
+
+```cfml
+<cflocation url="messages.cfm" addtoken="false">
+```
+
 ## よくあるエラー
 
 ### Docker Desktop未起動
